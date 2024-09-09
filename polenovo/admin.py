@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plants, Team, Expert
+from .models import Plants, Team, Expert, CheckList
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -32,3 +32,7 @@ class TeamAdmin(admin.ModelAdmin):
 class ExpertAdmin(admin.ModelAdmin):
     list_display = "name",
 
+@admin.register(CheckList)
+
+class CheckListAdmin(admin.ModelAdmin):
+    list_display = "team","plant","success",

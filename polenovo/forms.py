@@ -1,7 +1,25 @@
-from django.forms import ModelForm
-from .models import PlantsImport
+from django.forms import ModelForm, forms, ChoiceField
+from .models import CheckList, Plants
 
-class PlantImportForm(ModelForm):
-    class Meta:
-        model = PlantsImport
-        fields = ('csv_file',)
+
+class CLForm(forms.Form):
+    # create new form object from database question object
+    CHOICES = (
+        ('Н', 'Не определено'),
+        ('В', 'До вида'),
+        ('С', 'До семейства'),
+         )
+    success=ChoiceField(choices=CHOICES)
+    plantQ = Plants()
+    def __init__(
+            self,
+            plantQ,
+            plant,
+            team,
+            ):
+        super().__init__()
+
+        self.plantQ = plantQ
+        self.plant = plant
+        self.success = 'Не определено'
+        self.team = team

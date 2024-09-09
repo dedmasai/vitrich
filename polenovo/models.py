@@ -44,4 +44,9 @@ class CheckList(models.Model): #https://metanit.com/python/django/5.7.php
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     plant = models.ForeignKey(Plants, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-    points = models.IntegerField()
+    SUCCESS = (
+        ('В', 'До вида'),
+        ('С', 'До семейства'),
+        ('Н', 'Не определено'),
+    )
+    success =  models.CharField(max_length=30, choices=SUCCESS, default='Н')

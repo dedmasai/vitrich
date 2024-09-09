@@ -1,0 +1,21 @@
+{% extends "polenovo/base.html" %}
+
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Take your DISC assessment</h1>
+    <hr>
+    <h3>Insert instructions here</h3>
+    <hr>
+    <form   method="post">
+        {% csrf_token %}
+        <button type="submit">Submit</button>
+        <div>
+            {% for question in lines %}
+                <p>    {{question.plant}}    {{ question.success }}</p>
+                {{ form }}
+            {% endfor %}
+        </div>
+
+    </form>
+</div>
+{% endblock %}
