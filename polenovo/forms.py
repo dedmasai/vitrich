@@ -1,4 +1,4 @@
-from django.forms import ModelForm, forms, ChoiceField
+from django.forms import ModelForm, forms, ChoiceField, BooleanField
 from .models import CheckList, Plants
 
 
@@ -9,7 +9,8 @@ class CLForm(forms.Form):
         ('В', 'До вида'),
         ('С', 'До семейства'),
          )
-    success=ChoiceField(choices=CHOICES)
+    vid=BooleanField(initial=False)
+    fam = BooleanField(initial=False)
     plantQ = Plants()
     def __init__(
             self,

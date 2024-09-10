@@ -35,4 +35,4 @@ class ExpertAdmin(admin.ModelAdmin):
 @admin.register(CheckList)
 
 class CheckListAdmin(admin.ModelAdmin):
-    list_display = "team","plant","success",
+    list_display = "team","plant","vid",'fam'
