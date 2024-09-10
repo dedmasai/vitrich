@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+
+
+
 class Plants(models.Model):
     title = models.CharField(max_length=255)
     titleL = models.CharField(max_length=255)
@@ -47,6 +50,7 @@ RES = [
 class CheckList(models.Model): #https://metanit.com/python/django/5.7.php
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     plant = models.ForeignKey(Plants, on_delete=models.CASCADE)
+    N=models.CharField(max_length=255,default=None)
     date = models.DateField(auto_now_add=True)
     vid=models.BooleanField(default=False)
     fam=models.BooleanField(default=False)

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from django.forms import formset_factory, forms
-from django.shortcuts import render
+from django.forms import formset_factory, forms, BooleanField, modelformset_factory
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from polenovo.forms import CLForm,  Test_Form
@@ -12,32 +13,27 @@ def index(request):
 
 def cl_view(request):
 
-    team=Team.objects.first()
 
-    rawPl = Plants.objects.all()
-
-    clformset = []
-    for item in rawPl:
-        line_in_list = CLForm(
-            plantQ=item,
-            plant=item.title,
-            team=team,
-        )
-        clformset.append(line_in_list)
+    Formset=modelformset_factory(CheckList,fields=('N','fam','vid'))
 
     if request.method == 'POST':
-        lines = clformset
-        for line in lines:
+        form=Formset(request.POST)
+        form.save()
+        return redirect("index")
+    else:
+        team = Team.objects.first()
+        rawPl = Plants.objects.all()
+        for pl in rawPl:
             cl = CheckList(
                 team=team,
-                plant=line.plantQ,
-                suc=line.suc,
+                plant=pl,
+                N=pl.title
             )
             cl.save()
-    else:
-        lines = clformset
+
+    form = Formset()
     context = {
-        "lines": lines
+        "form": form
     }
 
     return render(request, "polenovo/checklist.html", context)
@@ -58,8 +54,6 @@ def test_view(request):
                 team=team,
                 plant=Pl,
                 fam=form.cleaned_data['fam'],
-                # fam=True,
-                # vid=True,
                 vid=form.cleaned_data['vid']
             )
             cl.save()

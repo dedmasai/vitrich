@@ -1,21 +1,41 @@
-{% extends "polenovo/base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
 
-{% block page_content %}
-<div class="col-md-8 offset-md-2">
-    <h1>Take your DISC assessment</h1>
-    <hr>
-    <h3>Insert instructions here</h3>
-    <hr>
+<div class="container">
+  <ul class="nav bg-info">
+    <li class="nav-item">
+      <a class="nav-link link-light" href="/">В начало</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-light" href="{% url 'index'  %}">Эксперты</a>
+    </li><li class="nav-item">
+      <a class="nav-link link-light" href="/admin">Администрирование</a>
+
+      </li><li class="nav-item">
+      <a class="nav-link link-light" href="/cl">Чеклист</a>
+    </li>
+  </ul>
+
+  {% block content %}
+  {% endblock %}
+</div>
+
+<hr>
     <form   method="post">
         {% csrf_token %}
         <button type="submit">Submit</button>
         <div>
-            {% for question in lines %}
-                <p>    {{question.plant}}    {{ question.suc.widget }} </p>
-                {{ form }}
-            {% endfor %}
-        </div>
+            {{ form.as_div}}
 
+        </div>
+    <button type="submit">Submit</button>
     </form>
-</div>
-{% endblock %}
+</body>
+</html>
