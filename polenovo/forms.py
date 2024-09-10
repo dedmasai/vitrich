@@ -1,4 +1,5 @@
-from django.forms import ModelForm, forms, ChoiceField, BooleanField
+from django import forms
+from django.forms import IntegerField, BooleanField
 from .models import CheckList, Plants
 
 
@@ -9,8 +10,8 @@ class CLForm(forms.Form):
         ('В', 'До вида'),
         ('С', 'До семейства'),
          )
-    vid=BooleanField(initial=False)
-    fam = BooleanField(initial=False)
+
+
     plantQ = Plants()
     def __init__(
             self,
@@ -19,8 +20,17 @@ class CLForm(forms.Form):
             team,
             ):
         super().__init__()
-
         self.plantQ = plantQ
         self.plant = plant
-        self.success = 'Не определено'
         self.team = team
+        self.suc = IntegerField(initial=0, required=False)
+class Test_Form(forms.Form):
+    class Meta:
+        model = CheckList
+        fields = ['vid','fam']
+        labels = {
+            'vid': 'Вид:',
+            'fam': 'Семейство:'
+        }
+    fam=forms.BooleanField(initial=False,required=False)
+    vid=forms.BooleanField(initial=False,required=False)

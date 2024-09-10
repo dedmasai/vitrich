@@ -3,7 +3,7 @@ from django.forms import formset_factory, forms
 from django.shortcuts import render
 
 # Create your views here.
-from polenovo.forms import CLForm
+from polenovo.forms import CLForm,  Test_Form
 from polenovo.models import Plants, CheckList, Team
 
 
@@ -31,7 +31,7 @@ def cl_view(request):
             cl = CheckList(
                 team=team,
                 plant=line.plantQ,
-                success=line.success,
+                suc=line.suc,
             )
             cl.save()
     else:
@@ -41,3 +41,32 @@ def cl_view(request):
     }
 
     return render(request, "polenovo/checklist.html", context)
+
+def test_view(request):
+
+    team=Team.objects.first()
+
+    Pl = Plants.objects.first(
+
+    )
+    form=Test_Form()
+
+    if request.method == 'POST':
+        form=Test_Form(request.POST)
+        if form.is_valid():
+            cl=CheckList(
+                team=team,
+                plant=Pl,
+                fam=form.cleaned_data['fam'],
+                # fam=True,
+                # vid=True,
+                vid=form.cleaned_data['vid']
+            )
+            cl.save()
+    else:
+        form = form
+    context = {
+        "form": form
+    }
+
+    return render(request, "polenovo/test.html", context)

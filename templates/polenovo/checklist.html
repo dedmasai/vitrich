@@ -11,7 +11,7 @@
         <button type="submit">Submit</button>
         <div>
             {% for question in lines %}
-                <p>    {{question.plant}}    {{ question.vid }} {{ question.fam }}</p>
+                <p>    {{question.plant}}    {{ question.suc.widget }} </p>
                 {{ form }}
             {% endfor %}
         </div>

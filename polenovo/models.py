@@ -38,7 +38,11 @@ class Expert(models.Model):
     def __str__(self):
         return self.name
 
-
+RES = [
+    (0, 'Не определен'),
+    (1, 'До семейства'),
+    (2, 'До вида'),
+]
 
 class CheckList(models.Model): #https://metanit.com/python/django/5.7.php
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
@@ -46,4 +50,8 @@ class CheckList(models.Model): #https://metanit.com/python/django/5.7.php
     date = models.DateField(auto_now_add=True)
     vid=models.BooleanField(default=False)
     fam=models.BooleanField(default=False)
+
+
+
+...
 
