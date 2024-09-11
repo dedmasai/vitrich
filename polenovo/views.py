@@ -1,10 +1,13 @@
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.forms import formset_factory, forms, BooleanField, modelformset_factory
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from polenovo.forms import CLForm,  Test_Form
+from django.urls import reverse
+
+from polenovo.forms import CLForm, Test_Form, LoginUserForm
 from polenovo.models import Plants, CheckList, Team
 
 
@@ -64,3 +67,21 @@ def test_view(request):
     }
 
     return render(request, "polenovo/test.html", context)
+
+
+def login_user(request):
+    if request.method == 'POST':
+        form = LoginUserForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user and user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+    else:
+        form = LoginUserForm()
+    return render(request, 'users/login.html', {'form': form})
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('users:login'))

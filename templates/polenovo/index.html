@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>{% block title %}{% endblock %}</title>
-  {% load bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-</head>
-<body>
+{% extends 'polenovo/base.html' %}
 
-<div class="container">
-  <ul class="nav bg-info">
-    <li class="nav-item">
-      <a class="nav-link link-light" href="/">В начало</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link link-light" href="{% url 'index'  %}">Эксперты</a>
-    </li><li class="nav-item">
-      <a class="nav-link link-light" href="/admin">Администрирование</a>
-
-      </li><li class="nav-item">
-      <a class="nav-link link-light" href="/cl">Чеклист</a>
-    </li> </li><li class="nav-item">
-      <a class="nav-link link-light" href="/test">Test</a>
-    </li>
-  </ul>
-
-  {% block content %}
-  {% endblock %}
-</div>
-</body>
-</html>
+{% block content %}
+  Hi
+{% endblock %}

@@ -19,5 +19,6 @@ from polenovo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('polenovo.urls')),
+    path('users/', include('users.urls', namespace="users")),
 
 ]
