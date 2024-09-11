@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
+from django.views.generic import TemplateView
 
 from polenovo.forms import CLForm, Test_Form
 from polenovo.models import Plants, CheckList, Team
@@ -68,4 +69,5 @@ def test_view(request):
 
     return render(request, "polenovo/test.html", context)
 
-
+class HomeView(TemplateView):
+    template_name = 'polenovo\home.html'

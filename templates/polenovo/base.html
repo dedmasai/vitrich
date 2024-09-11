@@ -2,41 +2,48 @@
 <html lang="en">
 <head>
     <head>
-  <title>{% block title %}{% endblock %}</title>
-  {% load bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-</head>
+        <title>{% block title %}{% endblock %}</title>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
 </head>
 <body>
 <div id="sidebar">
     {% block sidebar %}
-       <ul class="nav bg-info">
-    <li class="nav-item">
-      <a class="nav-link link-light" href="/">В начало</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link link-light" href="{% url 'index'  %}">Эксперты</a>
-    </li><li class="nav-item">
-      <a class="nav-link link-light" href="/admin">Администрирование</a>
+        <ul class="nav bg-info">
+            <li class="nav-item">
+                <a class="nav-link link-light" href="/">В начало</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'index' %}">Эксперты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="/admin">Администрирование</a>
 
-      </li><li class="nav-item">
-      <a class="nav-link link-light" href="/cl">Чеклист</a>
-    </li>
-{% if user.is_authenticated %}
- </li><li class="nav-item">
-      <a class="nav-link link-light" href="{% url 'users:logout'  %}">Выход</a>
-    </li>
-{% else %}
- </li><li class="nav-item">
-      <a class="nav-link link-light" href="{% url 'users:login'  %}">Вход</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="/cl">Чеклист</a>
+            </li>
+        <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'polenovo:home' %}">View</a>
+            </li>
+            {% if user.is_authenticated %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="{% url 'users:logout' %}">Выход</a>
+                </li>
+            {% else %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="{% url 'users:login' %}">Вход</a>
 
-    </li>
-    <li class=nav-item> <a class="nav-link link-light" href="{% url 'users:register' %}">Регистрация</a></li>
-{% endif %}
+                </li>
+                <li class=nav-item><a class="nav-link link-light" href="{% url 'users:register' %}">Регистрация</a></li>
+            {% endif %}
 
 
-  </ul>
+        </ul>
     {% endblock %}
 </div>
 <div id="content">
