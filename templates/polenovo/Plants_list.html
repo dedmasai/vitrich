@@ -1,0 +1,29 @@
+{% extends 'polenovo/basev.html' %}
+
+{% block title %}Plants{% endblock %}
+
+{% block content %}
+
+<h1 class="h3">Plants</h1>
+
+ {% if plants_list %}
+
+    <ul class="list-group">
+      {% for plant in plants_list %}
+        <li class="list-group-item">
+          <a class="text-reset" href="{{ plant.get_absolute_url }}">{{ plant.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+
+    <p>There are no author to display.</p>
+
+  {% endif %}
+
+    <p class="pt-2">
+      <a href="{% url 'polenovo:home' %}" role="button" class="btn btn-secondary w-100">Cancel</a>
+    </p>
+
+{% endblock content %}

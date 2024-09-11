@@ -6,22 +6,21 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from polenovo.forms import CLForm, Test_Form
 from polenovo.models import Plants, CheckList, Team
 
 
 def index(request):
-    return render(request,'polenovo/index.html')
+    return render(request, 'polenovo/index.html')
+
 
 def cl_view(request):
-
-
-    Formset=modelformset_factory(CheckList,fields=('N','fam','vid'))
+    Formset = modelformset_factory(CheckList, fields=('N', 'fam', 'vid'))
 
     if request.method == 'POST':
-        form=Formset(request.POST)
+        form = Formset(request.POST)
         form.save()
         return redirect("index")
     else:
@@ -42,19 +41,19 @@ def cl_view(request):
 
     return render(request, "polenovo/checklist.html", context)
 
-def test_view(request):
 
-    team=Team.objects.first()
+def test_view(request):
+    team = Team.objects.first()
 
     Pl = Plants.objects.first(
 
     )
-    form=Test_Form()
+    form = Test_Form()
 
     if request.method == 'POST':
-        form=Test_Form(request.POST)
+        form = Test_Form(request.POST)
         if form.is_valid():
-            cl=CheckList(
+            cl = CheckList(
                 team=team,
                 plant=Pl,
                 fam=form.cleaned_data['fam'],
@@ -69,5 +68,11 @@ def test_view(request):
 
     return render(request, "polenovo/test.html", context)
 
+
 class HomeView(TemplateView):
     template_name = 'polenovo\home.html'
+
+
+class PlantsListView(ListView):
+    model = Plants
+    template_name = 'Plants_list.html'
