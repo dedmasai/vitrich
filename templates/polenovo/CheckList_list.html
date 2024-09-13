@@ -6,12 +6,12 @@
 
 <h1 class="h3">Plants</h1>
 
- {% if plants_list %}
+ {% if checklist_list %}
 
     <ul class="list-group">
-      {% for plant in plants_list %}
+      {% for plant in checklist_list %}
         <li class="list-group-item">
-          <a class="text-reset" href="{{ plant.get_absolute_url }}">{{ plant.title }}</a>
+          <a class="text-reset" href="{{ plant.get_absolute_url }}">{{ plant.N }}</a>
         </li>
       {% endfor %}
     </ul>

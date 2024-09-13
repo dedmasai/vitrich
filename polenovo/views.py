@@ -73,6 +73,6 @@ class HomeView(TemplateView):
     template_name = 'polenovo\home.html'
 
 
-class PlantsListView(ListView):
-    model = Plants
-    template_name = 'Plants_list.html'
+class CheckListView(ListView):
+    model = CheckList
+    template_name = 'CheckList_list.html'
